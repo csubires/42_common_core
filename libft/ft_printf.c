@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:56:01 by csubires          #+#    #+#             */
-/*   Updated: 2024/06/04 18:26:20 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:21:18 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,6 @@
 
 static long	ft_parse_args(char c, va_list va)
 {
-	char	*str_hex_lo;
-	char	*str_hex_up;
-
-	str_hex_lo = "0123456789abcdef";
-	str_hex_up = "0123456789ABCDEF";
 	if (c == 'c')
 		return (ft_putchar_fd(va_arg(va, int), 1));
 	else if (c == '%')
@@ -28,13 +23,13 @@ static long	ft_parse_args(char c, va_list va)
 	else if (c == 'd' || c == 'i')
 		return (ft_putnbr_fd(va_arg(va, int), 1));
 	else if (c == 'p')
-		return (ft_putnbr_base(c, va_arg(va, unsigned long), str_hex_lo));
+		return (ft_putnbr_base(c, va_arg(va, unsigned long), STR_HEX_LO));
 	else if (c == 'u')
-		return (ft_putnbr_base(c, va_arg(va, unsigned int), "0123456789"));
+		return (ft_putnbr_base(c, va_arg(va, unsigned int), STR_DEC));
 	else if (c == 'x')
-		return (ft_putnbr_base(c, va_arg(va, unsigned int), str_hex_lo));
+		return (ft_putnbr_base(c, va_arg(va, unsigned int), STR_HEX_LO));
 	else if (c == 'X')
-		return (ft_putnbr_base(c, va_arg(va, unsigned int), str_hex_up));
+		return (ft_putnbr_base(c, va_arg(va, unsigned int), STR_HEX_UP));
 	return (0);
 }
 

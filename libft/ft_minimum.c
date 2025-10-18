@@ -6,11 +6,9 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 11:00:52 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/04 11:17:04 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:19:11 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft.h"
 
 int	ft_minimum(int a, int b)
 {

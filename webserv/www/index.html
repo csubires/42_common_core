@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>webserv</title>
+    <link rel="stylesheet" href="styles.css">
+	<link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <div class="cursor-trail"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">WEBSERV</div>
+        <ul class="nav-menu">
+            <li><a href="#home" class="nav-link">Home</a></li>
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#features" class="nav-link">Features</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="stars"></div>
+        <div class="hero-content">
+            <h1 class="glitch" data-text="WELCOME TO OUR WEBSERVER">WELCOME TO OUR WEBSERVER</h1>
+            <p class="hero-subtitle">by cschnath and csubires</p>
+            <div class="files">
+                <ul id="file-list">
+                </ul>
+            </div>
+            <button class="cta-button">UPLOAD</button>
+        </div>
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>SCROLL</span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">ABOUT THE SERVER</h2>
+            <div class="about-grid">
+                <div class="about-card" data-tilt>
+                    <div class="card-icon">🖥️</div>
+                    <h3>Custom Webserver</h3>
+                    <p>Built from scratch in C++, our webserver delivers reliable and efficient HTTP services.</p>
+                </div>
+                <div class="about-card" data-tilt>
+                    <div class="card-icon">🔒</div>
+                    <h3>Secure Connections</h3>
+                    <p>Supports advanced security features to keep your data safe and private.</p>
+                </div>
+                <div class="about-card" data-tilt>
+                    <div class="card-icon">⚡</div>
+                    <h3>High Performance</h3>
+                    <p>Handles multiple clients simultaneously with optimized resource management.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section">
+        <div class="container">
+            <h2 class="section-title">FEATURES</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>HTTP/1.1 Support</h3>
+                        <p>Handles GET, POST, DELETE requests with full HTTP/1.1 compliance.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Configurable Routing</h3>
+                        <p>Flexible configuration files for custom routes, error pages, and server settings.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>CGI Support</h3>
+                        <p>Runs CGI scripts for dynamic content and backend integration.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Multiple Host Support</h3>
+                        <p>Virtual hosting for serving multiple domains from one server instance.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Custom Error Pages</h3>
+                        <p>Serve personalized error pages for 404, 500, and other HTTP errors.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-image">
+                        <div class="feature-overlay">
+                            <button class="feature-btn">VIEW FEATURE</button>
+                        </div>
+                    </div>
+                    <div class="feature-info">
+                        <h3>Access Logging</h3>
+                        <p>Detailed access logs for monitoring requests and server activity.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">CONTACT US</h2>
+            <form class="contact-form">
+                <div class="form-group">
+                    <input type="text" id="name" required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" required>
+                    <label for="email">Your Email</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="5" required></textarea>
+                    <label for="message">Your Message</label>
+                </div>
+                <button type="submit" class="submit-btn">SEND MESSAGE</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Particle Canvas -->
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Audio Control -->
+    <div class="audio-control">
+        <button id="audio-toggle">🔊</button>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>

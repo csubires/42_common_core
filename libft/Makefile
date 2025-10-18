@@ -50,9 +50,9 @@ C_UTILS = ft_free_ptr.c	\
 			ft_nbrlen.c	\
 			ft_isinset.c	\
 			ft_putnbr_base.c	\
-			ft_striteri.c	\
 			ft_striter.c	\
 			ft_atoi_base.c	\
+			ft_atoi_err.c	\
 			ft_minimum.c	\
 			ft_maximum.c	\
 			ft_abs.c	\
@@ -73,45 +73,48 @@ C_ADDED = ft_printf.c	\
 
 NAME		= libft.a
 HEADER		= libft.h
-CC			= clang
-AR			= ar -crs
-CFLAGS 		= -Wall -Werror -Wextra -fPIE -I$(H_FILES)
 H_FILES		= .
-O_DIR		= obj
 C_DIR		= .
-O_DIR_BONUS	= obj_bonus
 C_DIR_BONUS	= .
+O_DIR		= obj
+O_DIR_BONUS	= obj_bonus
 O_FILES		= $(addprefix $(O_DIR)/,$(C_FILES:%.c=%.o))
 O_UTILS		= $(addprefix $(O_DIR)/,$(C_UTILS:%.c=%.o))
 O_ADDED		= $(addprefix $(O_DIR)/,$(C_ADDED:%.c=%.o))
 O_BONUS		= $(addprefix $(O_DIR_BONUS)/,$(C_BONUS:%.c=%.o))
+
 PRINT		= echo
 GREEN		= \033[0;32m
 YELLOW		= \033[1;33m
 RED			= \033[1;31m
+BLUE		= \033[1;34m
 ENDC		= \033[0m
+
+AR			= ar -crs
+CC			= gcc
+CFLAGS 		= -Wall -Werror -Wextra -g -fPIE -I$(H_FILES)
 # --------------------------------------
 
-all:		$(NAME)
+all:			$(NAME)
 
-$(NAME):	$(O_FILES) $(O_UTILS) | $(O_DIR)
+$(NAME):		$(O_FILES) $(O_UTILS) | $(O_DIR)
 	@$(PRINT) "$(YELLOW)BUILDING LIBRARY:$(ENDC)\t$(NAME)"
 	@$(AR) $(NAME) $(O_FILES) $(O_UTILS)
 
 $(O_DIR)/%.o:	$(C_DIR)/%.c | $(O_DIR)
-	@$(PRINT) "$(GREEN)OBJECT:$(ENDC)\t$<		->	$@"
+	@$(PRINT) "\e[1A\e[K$(BLUE)COMPILING OBJECT:$(ENDC)\t$< > $@"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
-added:		$(NAME) $(O_ADDED) | $(O_DIR)
+added:			$(NAME) $(O_ADDED) | $(O_DIR)
 	@$(PRINT) "$(YELLOW)BUILDING LIBRARY WITH \"ADDED FUNCTIONS\":$(ENDC)\t$(NAME)"
 	@$(AR) $(NAME) $(O_ADDED)
 
-bonus:		$(NAME) $(O_BONUS) | $(O_DIR_BONUS)
+bonus:			$(NAME) $(O_BONUS) | $(O_DIR_BONUS)
 	@$(PRINT) "$(YELLOW)BUILDING LIBRARY WITH \"BONUS\":$(ENDC)\t$(NAME)"
 	@$(AR) $(NAME) $(O_BONUS)
 
 $(O_DIR_BONUS)/%.o:	$(C_DIR_BONUS)/%.c | $(O_DIR_BONUS)
-	@$(PRINT) "$(GREEN)OBJECT BONUS:$(ENDC)\t$<		->	$@"
+	@$(PRINT) "\e[1A\e[K$(BLUE)COMPILING OBJECT BONUS:$(ENDC)\t$< > $@"
 	@$(CC) $(CFLAGS) -c $< -o $@
 
 $(O_DIR):
@@ -125,11 +128,11 @@ $(O_DIR_BONUS):
 clean:
 	clear
 	@$(PRINT) "$(RED)REMOVED!: OBJECTS$(ENDC)"
-	@rm -fr $(O_DIR) $(O_DIR_BONUS) *.o
+	@rm -fr $(O_DIR) $(O_DIR_BONUS) *.o 2>/dev/null
 
 fclean: clean
-	@$(PRINT) "$(RED), LIBRARY, EXECUTABLE$(ENDC)"
-	@rm -f $(NAME) 2>/dev/null ; true
+	@$(PRINT) "\r$(RED), LIBRARY AND EXECUTABLE$(ENDC)"
+	@rm -f $(NAME) 2>/dev/null
 
 re:	fclean all
 
@@ -145,11 +148,18 @@ print:
 		@$(PRINT) "$(YELLOW)OBJECTS ADDED:$(ENDC)\t$(O_ADDED)"
 		@$(PRINT) "$(YELLOW)SOURCES BONUS:$(ENDC)\t$(C_BONUS)"
 		@$(PRINT) "$(YELLOW)OBJECTS BONUS:$(ENDC)\t$(O_BONUS)"
-		@nm --print-armap $(NAME) 2>/dev/null ; true
+		@$(PRINT) "$(YELLOW)\nCONTENTS OF THE LIBRARY FILE:"
+		@nm --print-armap $(NAME) 2>/dev/null
 
 norm:
-		@norminette -R CheckForbiddenSourceHeader $(C_FILES) $(C_BONUS) $(C_UTILS) $(C_ADDED) $(HEADER) 2>/dev/null ; true
+		@norminette -R CheckForbiddenSourceHeader $(C_FILES) $(C_BONUS) $(C_UTILS) $(C_ADDED) $(HEADER) 2>/dev/null
 
-leaks:	CFLAGS += -g -fsanitize=address
+debug:	fclean
+	$(MAKE) CFLAGS="$(CFLAGS) -pedantic -g -O0 \
+	-fsanitize=address -fsanitize=undefined -fsanitize=thread" all
 
-.PHONY: all, clean, fclean, re, bonus, added, print, norm, leaks
+optimize:	fclean
+	$(MAKE) CFLAGS="$(CFLAGS) -Ofast -march=native -flto -funroll-loops \
+	-fomit-frame-pointer" all
+
+.PHONY: all, clean, fclean, re, bonus, added, print, norm, debug, optimize

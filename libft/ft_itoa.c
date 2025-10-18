@@ -6,42 +6,55 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 10:30:43 by csubires          #+#    #+#             */
-/*   Updated: 2024/06/20 20:08:49 by csubires         ###   ########.fr       */
+/*   Updated: 2024/04/22 14:32:01 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char	*convert(long long n, char *arr_str, int len, int sign)
+static int	ft_nlen(int n)
 {
-	arr_str[len--] = '\0';
-	if (n == 0)
-		arr_str[len--] = '0';
-	while (n > 0)
+	int	len;
+
+	len = 0;
+	while (n)
 	{
-		arr_str[len--] = (n % 10) + '0';
 		n /= 10;
+		len++;
 	}
-	if (sign == -1)
-		arr_str[len] = '-';
-	return (arr_str);
+	return (len);
+}
+
+static void	ft_toa(unsigned int len, unsigned int n, char *str)
+{
+	long long	tmp_n;
+
+	tmp_n = n;
+	while (len)
+	{
+		str[--len] = (tmp_n % 10) + '0';
+		tmp_n /= 10;
+	}
 }
 
 char	*ft_itoa(int n)
 {
-	long long	tmp_n;
-	int			len;
-	int			sign;
-	char		*arr_str;
+	char			*str;
+	unsigned int	len;
+	unsigned int	sign;
 
 	sign = 1;
 	if (n < 0)
 		sign = -1;
-	tmp_n = (long long)n * sign;
-	len = ft_nbrlen(tmp_n);
-	arr_str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!arr_str)
+	len = ft_nlen(n * sign);
+	if (n <= 0)
+		len++;
+	str = (char *)malloc(sizeof(char) * (len + 1));
+	if (!str)
 		return (0);
-	arr_str = convert(tmp_n, arr_str, len, sign);
-	return (arr_str);
+	str[len] = '\0';
+	ft_toa(len, n * sign, str);
+	if (n < 0)
+		str[0] = '-';
+	return (str);
 }

@@ -35,6 +35,7 @@
 *.i*86
 *.x86_64
 *.hex
+test
 
 # Debug files
 *.dSYM/
@@ -88,5 +89,72 @@ fdf/fdf
 fdf/fdf_bonus
 fdf/fdf_linux
 
+# philosophers
+philosophers/philo/philo
+philosophers/philo_bonus/philo
+philosophers/philo_bonus/philo_bonus
+
+# minishell
+minishell/minishell
+
+# cpp
+cpp/cpp_module_00/ex00/megaphone
+cpp/cpp_module_00/ex01/phonebook
+cpp/cpp_module_00/ex02/test
+
+cpp/cpp_module_01/ex00/zombie
+cpp/cpp_module_01/ex01/zombieHorde
+cpp/cpp_module_01/ex02/main
+cpp/cpp_module_01/ex03/unnecessaryViolence
+cpp/cpp_module_01/ex04/main
+cpp/cpp_module_01/ex05/harl
+cpp/cpp_module_01/ex06/harlFilter
+
+cpp/cpp_module_02/ex00/main
+cpp/cpp_module_02/ex01/main
+cpp/cpp_module_02/ex02/main
+cpp/cpp_module_02/ex03/main
+
+cpp/cpp_module_03/ex00/main
+cpp/cpp_module_03/ex01/main
+cpp/cpp_module_03/ex02/main
+cpp/cpp_module_03/ex03/DiamondTrap
+
+cpp/cpp_module_04/ex00/main
+cpp/cpp_module_04/ex01/main
+cpp/cpp_module_04/ex02/main
+cpp/cpp_module_04/ex03/main
+
+cpp/cpp_module_05/ex00/bureaucrat
+cpp/cpp_module_05/ex01/form
+cpp/cpp_module_05/ex03/intern
+cpp/cpp_module_05/ex02/aform
+cpp/cpp_module_05/ex02/garden_shrubbery
+
+cpp/cpp_module_06/ex00/convert
+cpp/cpp_module_06/ex01/serializer
+cpp/cpp_module_06/ex02/identify
+
+cpp/cpp_module_07/ex00/whatever
+cpp/cpp_module_07/ex01/iter
+cpp/cpp_module_07/ex02/array
+
+cpp/cpp_module_08/ex00/easyfind
+cpp/cpp_module_08/ex01/span
+cpp/cpp_module_08/ex02/MutantStack
+
+cpp/cpp_module_09/ex00/btc
+cpp/cpp_module_09/ex01/RPN
+cpp/cpp_module_09/ex02/PmergeMe
+
+# cub3D
+cub3d/cub3D
+cub3d/lib/MLX42
+cub3d/lib/glfw
+
+# inception
+#.env
+
 # Others
 **/glfw/tests/*
+.ssh

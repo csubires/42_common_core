@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:06:43 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/19 13:11:23 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:10:45 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,10 @@ void	free_map(t_map *map);
 void	set_z_limits(t_map *map);
 void	create_struct_mem(t_map *map);
 t_map	*initialise_map(char *file);
-
 // PARSE.C
 void	parse_args(t_map **map, int argc, char *argv[]);
-
 // RENDER.C
 void	render_map(t_fdfs *fdfs);
-
 // UTILS.C
 void	error_and_exit(const char *msg);
 void	free_all(t_fdfs *fdfs);

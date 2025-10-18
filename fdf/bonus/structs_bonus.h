@@ -6,12 +6,13 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 09:39:36 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/16 12:58:47 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/17 11:27:13 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_BONUS_H
 # define STRUCTS_BONUS_H
+
 // MAP FILE
 typedef struct s_map
 {
@@ -55,7 +56,7 @@ typedef struct s_state
 	int			zenith;
 	int			menu;
 	t_palette	palette;
-}	t_state;
+}	t_requirement;
 
 // POINT
 typedef struct s_point
@@ -79,8 +80,9 @@ typedef struct s_fdfs
 	float	rotate_x;
 	float	rotate_y;
 	float	rotate_z;
-	t_state	state;
+	t_requirement	state;
 	float	zoom;
 	float	flat;
 }	t_fdfs;
+
 #endif

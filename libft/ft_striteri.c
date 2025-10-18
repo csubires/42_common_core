@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:25:51 by csubires          #+#    #+#             */
-/*   Updated: 2024/04/16 16:06:39 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:24:20 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,5 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char*))
 
 	x = 0;
 	while (*s)
-	{
-		f(x, s);
-		s++;
-		x++;
-	}
+		f(x++, s++);
 }

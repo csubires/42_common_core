@@ -1,0 +1,16 @@
+NO ./maps/textures/1.png
+SO ./maps/textures/2.png
+
+WE ./maps/textures/3.png
+EA ./maps/textures/4.png
+
+
+F 200,150,50
+C 30,60,90
+
+    1111111
+    1000001
+11111100001
+10000000001
+1W001110001
+11111111111

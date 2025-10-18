@@ -10,18 +10,10 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
 int	ft_isinset(char c, char const *set)
 {
-	unsigned int	x;
-
-	x = 0;
-	while (set[x])
-	{
-		if (set[x] == c)
+	while (*set)
+		if (*set++ == c)
 			return (1);
-		x++;
-	}
 	return (0);
 }

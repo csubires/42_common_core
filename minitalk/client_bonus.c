@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/27 09:44:38 by csubires          #+#    #+#             */
-/*   Updated: 2024/06/10 09:14:54 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 20:58:35 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ static void	ft_confirm(int sig_usr)
 int	main(int argc, char *argv[])
 {
 	struct sigaction	sa;
+	int					error;
 
 	if (argc != 3)
 	{
@@ -61,6 +62,6 @@ int	main(int argc, char *argv[])
 	sigaction(SIGUSR1, &sa, 0);
 	sigaction(SIGUSR2, &sa, 0);
 	ft_printf("Received: ");
-	ft_send_msg(ft_atoi(argv[1]), argv[2]);
+	ft_send_msg(ft_atoi_err(argv[1], &error), argv[2]);
 	return (0);
 }

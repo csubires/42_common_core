@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/03 09:06:43 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/19 12:48:38 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/17 09:20:15 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	map_to_mem(t_map *map, int fd)
 		x = -1;
 		while (++x < map->width)
 		{
-			map->z_gen[y][x] = ft_atoi(split[x], &error);
+			map->z_gen[y][x] = ft_atoi_err(split[x], &error);
 			map->color_file[y][x] = parse_color(map, split[x]);
 		}
 		ft_free_split(split);

@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/15 10:45:40 by csubires          #+#    #+#             */
-/*   Updated: 2024/04/23 14:40:45 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 14:11:15 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,12 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	if ((!dst && !src) || (dst == src))
 		return (dst);
+	x = -1;
 	if (src < dst)
 		while (len--)
 			((unsigned char *)dst)[len] = ((unsigned char *)src)[len];
 	else
-	{
-		x = 0;
-		while (x < len)
-		{
+		while (++x < len)
 			((unsigned char *)dst)[x] = ((unsigned char *)src)[x];
-			x++;
-		}
-	}
 	return (dst);
 }

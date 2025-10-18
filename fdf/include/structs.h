@@ -6,12 +6,13 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/16 09:39:36 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/19 10:27:14 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:10:56 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTS_H
 # define STRUCTS_H
+
 // MAP FILE
 typedef struct s_map
 {

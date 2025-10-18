@@ -6,12 +6,11 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 09:36:05 by csubires          #+#    #+#             */
-/*   Updated: 2024/07/09 15:16:32 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 11:05:50 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include "libft/libft.h"
 
 static char	*ft_cut_line(char *buffer_global)
 {

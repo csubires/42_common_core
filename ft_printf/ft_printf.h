@@ -6,7 +6,7 @@
 /*   By: csubires <csubires@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/25 09:57:33 by csubires          #+#    #+#             */
-/*   Updated: 2024/06/21 11:21:52 by csubires         ###   ########.fr       */
+/*   Updated: 2024/08/16 10:49:08 by csubires         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,11 @@
 # include <stdlib.h>
 # include "libft/libft.h"
 
-/* FT_PRINTF */
+# define STR_HEX_LO	"0123456789abcdef"
+# define STR_HEX_UP	"0123456789ABCDEF"
+# define STR_DEC	"0123456789"
+
+// FT_PRINTF.C
 int		ft_printf(char const *s, ...);
 
 #endif
