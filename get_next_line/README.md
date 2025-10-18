@@ -1,8 +1,6 @@
+![Rating](/assets/images/header.png)
 
-```markdown
-![Rating](/_assets/images/header.png)
-
-# GET_NEXT_LINE [subject](es.next_get_line.pdf)
+# GET_NEXT_LINE
 
 <table align="center">
 <caption>Table of Contents</caption>
@@ -129,7 +127,4 @@ https://42.nauman.cc/category/cursus/get_next_line
 
 - fd: File Descriptor
 
-[
-	$${\color{red}BACK$$
-](../../README.md)
-```
+[$${\color{red}BACK}$$](../../README.md)

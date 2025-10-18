@@ -1,4 +1,4 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
 # BORN2BEROOT [subject](es.born2beroot.pdf)
 

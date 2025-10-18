@@ -1,3 +1,5 @@
+![Rating](/assets/images/header.png)
+
 # Minishell Project Summary
 
 ## Project Overview
@@ -88,3 +90,5 @@ The project permits these key function groups:
 - libft integration if used
 
 This project emphasizes robust process management, proper signal handling, accurate command parsing, and efficient memory management while replicating core shell functionalities found in modern Unix systems.
+
+[$${\color{red}BACK}$$](../../README.md)

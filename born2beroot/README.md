@@ -1,6 +1,5 @@
 
-```markdown
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
 # BORN2BEROOT [subject](es.born2beroot.pdf)
 
@@ -480,6 +479,4 @@ ip a
 
 **lvscan**: is responsible for searching and listing the logical volumes in the system.
 
-
-[$${\color{red}BACK$$}$$](../../README.md)
-```
+[$${\color{red}BACK}$$](../../README.md)

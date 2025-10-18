@@ -1,3 +1,5 @@
+![Rating](/assets/images/header.png)
+
 # cub3D Project Summary
 
 ## Project Overview
@@ -61,3 +63,5 @@ The program must return "Error" followed by an explicit message for:
 - Any misconfiguration in the `.cub` file
 
 This project emphasizes mathematical applications in computer graphics, efficient algorithm design, and rigorous C programming practices while introducing students to fundamental 3D rendering techniques.
+
+[$${\color{red}BACK}$$](../../README.md)

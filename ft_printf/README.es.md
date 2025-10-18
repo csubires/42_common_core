@@ -1,6 +1,6 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# FT_PRINTF [subject](es.printf.pdf)
+# FT_PRINTF
 
 <table align="center">
 <caption>Tabla de contenidos</caption>

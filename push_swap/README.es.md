@@ -1,6 +1,6 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# PUSH_SWAP [subject](es.push_swap.pdf)
+# PUSH_SWAP
 
 ### Indice de contenidos
 

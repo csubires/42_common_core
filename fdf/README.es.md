@@ -1,10 +1,10 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# FDF [subject](es.fdf.pdf)
+# FDF
 
 <p style="text-align:center">
 
-![FDF](../../assets/fdf/fdf1.png)
+![FDF](../assets/fdf/fdf1.png)
 </p>
 
 ## Indice de contenidos

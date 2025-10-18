@@ -1,3 +1,5 @@
+![Rating](/assets/images/header.png)
+
 # NetPractice Project Summary
 
 ## Project Overview
@@ -53,3 +55,5 @@ Each level presents:
 - **TCP/IP protocol stack** practical application
 
 This project emphasizes hands-on learning of networking fundamentals through practical exercises, preparing students for real-world network administration tasks by developing critical thinking and problem-solving skills in TCP/IP network configuration.
+
+[$${\color{red}BACK}$$](../../README.md)

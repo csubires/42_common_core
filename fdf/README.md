@@ -1,12 +1,11 @@
 
-```markdown
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# FDF [subject](es.fdf.pdf)
+# FDF
 
 <p style="text-align:center">
 
-![FDF](../../assets/fdf/fdf1.png)
+![FDF](../assets/fdf/fdf1.png)
 </p>
 
 ## Table of Contents
@@ -112,7 +111,7 @@ Each number represents a point in space:
 
 ## BONUS
 
-![MAP](../../assets/fdf/map1.png)
+![MAP](../assets/fdf/map1.png)
 
 You will get extra points if you add:
 - An extra projection (such as parallel or conical)
@@ -121,7 +120,7 @@ You will get extra points if you add:
 - Rotate your model.
 - Add one more bonus of your choice.
 
-![MENU](../../assets/fdf/menu.png)
+![MENU](../assets/fdf/menu.png)
 
 ## Main Algorithms for Generating Lines
 ### 1. Bresenham Algorithm
@@ -534,5 +533,4 @@ valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./fdf_bonus
 - [Color tool](https://rgbcolorcode.com/color/008000)
 - [Color tool](https://www.rgbtohex.net/)
 
-[$${\color{red}BACK$$}$$](../../README.md)
-```
+[$${\color{red}BACK}$$](../../README.md)

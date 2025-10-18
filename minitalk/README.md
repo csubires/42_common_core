@@ -1,8 +1,6 @@
+![Rating](/assets/images/header.png)
 
-```markdown
-![Rating](/_assets/images/header.png)
-
-# MINITALK [subject](es.minitalk.pdf)
+# MINITALK
 
 ## Project Index
 - [SERVER](#SERVER)
@@ -371,4 +369,3 @@ The problem also appears when sending messages simultaneously from different cli
 To display the complete text once fully received, memory would need to be allocated for that text, but the server doesn't know the length. So the length could be sent before the text from the client, but then we couldn't know if it meets the condition of 1 second per 100 letters, since it would have to wait for everything to be sent (imagine 1 million characters)
 
 [$${\color{red}BACK}$$](../../README.md)
-```

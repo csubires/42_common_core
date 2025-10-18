@@ -1,7 +1,6 @@
-```markdown
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# PUSH_SWAP [subject](es.push_swap.pdf)
+# PUSH_SWAP
 
 ### Table of Contents
 
@@ -500,4 +499,3 @@ ARG="53 291 43 450 491 556 364 435 42 706 502 255 868 210 698 432 499 787 990 98
 - [Number generator](https://www.calculatorsoup.com/calculators/statistics/random-number-generator.php)
 
 [$${\color{red}BACK}$$](../../README.md)
-```

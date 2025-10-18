@@ -1,3 +1,5 @@
+![Rating](/assets/images/header.png)
+
 # Inception Project Summary
 
 ## Project Overview
@@ -67,3 +69,5 @@ The project emphasizes responsible AI usage:
 - Understanding of Docker concepts and implementation details
 
 This project focuses on practical system administration skills, Docker containerization expertise, security awareness, and infrastructure management using modern DevOps tools and practices.
+
+[$${\color{red}BACK}$$](../../README.md)

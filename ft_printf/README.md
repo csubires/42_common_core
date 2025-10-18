@@ -1,8 +1,6 @@
+![Rating](/assets/images/header.png)
 
-```markdown
-![Rating](/_assets/images/header.png)
-
-# FT_PRINTF [subject](es.printf.pdf)
+# FT_PRINTF
 
 <table align="center">
 <caption>Table of Contents</caption>
@@ -142,5 +140,4 @@ int	ft_putnbr_base(char c, unsigned long nbr, char *base)
 ```
 Function created as an extra exercise in the piscine. Displays any unsigned number on screen by passing a specific base as parameter. This function will be used to print hexadecimal numbers, pointers, and unsigned numbers. Returns the number of characters printed or -1 if an error occurs.
 
-[$${\color{red}BACK$$}$$](../../README.md)
-```
+[$${\color{red}BACK}$$](../../README.md)

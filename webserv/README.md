@@ -1,3 +1,5 @@
+![Rating](/assets/images/header.png)
+
 # Webserv Project Summary
 
 ## Project Overview
@@ -90,4 +92,6 @@ Webserv is a project that requires developing a custom HTTP server in C++98. The
 - **Performance** under stress conditions
 - **Code quality** and C++98 standards compliance
 
-This project emphasizes understanding HTTP protocol internals, efficient I/O management, robust server architecture, and practical network programming skills while maintaining high performance and reliability standards comparable to production web servers.s
+This project emphasizes understanding HTTP protocol internals, efficient I/O management, robust server architecture, and practical network programming skills while maintaining high performance and reliability standards comparable to production web servers.
+
+[$${\color{red}BACK}$$](../../README.md)

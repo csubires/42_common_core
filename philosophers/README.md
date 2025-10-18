@@ -1,7 +1,6 @@
-```markdown
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# PHILOSOPHERS [subject](es.philosophers.pdf)
+# PHILOSOPHERS
 
 ## Description
 In this project, you will learn the basic principles of threading a process.
@@ -282,7 +281,4 @@ valgrind --tool=helgrind --track-fds=yes --history-level=approx  ./philo 2 200 1
 valgrind --tool=drd ./philo 2 200 10 10 2
 valgrind --tool=memcheck --leak-check=full ./philo 2 200 10 10 2
 
-https://enzodeg40.github.io/42-Evals/Cursus/Philosophers/
-
-✅❌
-```
+[$${\color{red}BACK}$$](../../README.md)

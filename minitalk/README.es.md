@@ -1,6 +1,6 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# MINITALK [subject](es.minitalk.pdf)
+# MINITALK
 
 ## Indice del proyecto
 - [SERVER](#SERVER)

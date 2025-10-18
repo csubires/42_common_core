@@ -1,6 +1,6 @@
-![Rating](/_assets/images/header.png)
+![Rating](/assets/images/header.png)
 
-# GET_NEXT_LINE [subject](es.next_get_line.pdf)
+# GET_NEXT_LINE
 
 <table align="center">
 <caption>Tabla de contenidos</caption>
