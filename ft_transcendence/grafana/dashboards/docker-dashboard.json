@@ -1,0 +1,246 @@
+{
+  "title": "Platform Monitoring",
+  "uid": "monitoring",
+  "schemaVersion": 36,
+  "version": 1,
+  "refresh": "30s",
+  "timezone": "browser",
+  "panels": [
+
+    {
+      "title": "Prometheus Status",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 0, "y": 0 },
+      "targets": [
+        { "expr": "up{job=\"prometheus\"}", "refId": "A" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "value": "0", "text": "❌ DOWN" },
+            { "type": "value", "value": "1", "text": "✅ UP" }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "red" },
+              { "value": 1, "color": "green" }
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "title": "Web App Status",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 4, "y": 0 },
+      "targets": [
+        { "expr": "up{job=\"gateway\"}", "refId": "A" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            { "type": "value", "value": "0", "text": "❌ DOWN" },
+            { "type": "value", "value": "1", "text": "✅ UP" }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "red" },
+              { "value": 1, "color": "green" }
+            ]
+          }
+        }
+      }
+    },
+
+    {
+      "title": "Total Errors",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 8, "y": 0 },
+      "targets": [
+        { "expr": "sum(log_errors_total)", "refId": "A" }
+      ]
+    },
+
+    {
+      "title": "Total Warnings",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 12, "y": 0 },
+      "targets": [
+        { "expr": "sum(log_warnings_total)", "refId": "A" }
+      ]
+    },
+
+    {
+      "title": "Files Processed (Last Run)",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 16, "y": 0 },
+      "targets": [
+        { "expr": "log_processor_files_processed", "refId": "A" }
+      ]
+    },
+
+    {
+      "title": "Last Processing Timestamp",
+      "type": "stat",
+      "gridPos": { "h": 4, "w": 4, "x": 20, "y": 0 },
+      "targets": [
+        { "expr": "log_processor_last_run_timestamp", "refId": "A" }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "dateTimeFromNow"
+        }
+      }
+    },
+
+    {
+      "title": "Errors & Warnings Over Time",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 4 },
+      "targets": [
+        {
+          "expr": "log_errors_total",
+          "legendFormat": "{{service}} - {{file}} - Errors",
+          "refId": "A"
+        },
+        {
+          "expr": "log_warnings_total",
+          "legendFormat": "{{service}} - {{file}} - Warnings",
+          "refId": "B"
+        }
+      ]
+    },
+
+    {
+      "title": "Log Size by File",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 4 },
+      "targets": [
+        {
+          "expr": "log_file_size_bytes",
+          "legendFormat": "{{service}} - {{file}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "unit": "bytes" }
+      }
+    },
+
+    {
+      "title": "Log Age by File",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 12 },
+      "targets": [
+        {
+          "expr": "log_file_age_seconds",
+          "legendFormat": "{{service}} - {{file}}",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": { "unit": "s" }
+      }
+    },
+
+    {
+      "title": "Lines per File",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 12 },
+      "targets": [
+        {
+          "expr": "log_file_lines_total",
+          "legendFormat": "{{service}} - {{file}}",
+          "refId": "A"
+        }
+      ]
+    },
+
+    {
+      "title": "Prometheus CPU Usage",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 0, "y": 20 },
+      "targets": [
+        {
+          "expr": "rate(process_cpu_seconds_total{job=\"prometheus\"}[5m]) * 100",
+          "legendFormat": "CPU %",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "percent"
+        }
+      }
+    },
+
+    {
+      "title": "Prometheus Memory Usage",
+      "type": "timeseries",
+      "gridPos": { "h": 8, "w": 12, "x": 12, "y": 20 },
+      "targets": [
+        {
+          "expr": "process_resident_memory_bytes{job=\"prometheus\"}",
+          "legendFormat": "Memory",
+          "refId": "A"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "bytes"
+        }
+      }
+    },
+
+    {
+      "title": "Log Files Table",
+      "type": "table",
+      "gridPos": { "h": 10, "w": 24, "x": 0, "y": 28 },
+      "targets": [
+        {
+          "expr": "log_file_size_bytes",
+          "format": "table",
+          "refId": "A",
+          "instant": true
+        },
+        {
+          "expr": "log_errors_total",
+          "format": "table",
+          "refId": "B",
+          "instant": true
+        },
+        {
+          "expr": "log_warnings_total",
+          "format": "table",
+          "refId": "C",
+          "instant": true
+        }
+      ],
+      "transformations": [
+        {
+          "id": "merge"
+        },
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "instance": true,
+              "job": true
+            },
+            "renameByName": {
+              "Value": "Value",
+              "service": "Service",
+              "file": "File"
+            }
+          }
+        }
+      ]
+    }
+
+  ]
+}

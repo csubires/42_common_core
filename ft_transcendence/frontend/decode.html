@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Generador TOTP</title>
+	<link rel="stylesheet" href="/css/common.css">
+	<link rel="icon" href="/icon.png">
+	<style>
+		.otp-code {
+			font-size: 32px;
+			font-weight: bold;
+			color: #2e7d32;
+			letter-spacing: 5px;
+			margin: 10px 0;
+			text-align: center;
+		}
+
+		.timer {
+			color: #666;
+			font-size: 14px;
+			margin-top: 10px;
+		}
+
+		.info {
+			background-color: #e3f2fd;
+			border: 1px solid #2196F3;
+			border-radius: 5px;
+			padding: 15px;
+			margin-bottom: 20px;
+			font-size: 14px;
+		}
+
+		#copyBtn {
+			margin-top: 10px;
+			padding: 8px 15px;
+			font-size: 14px;
+			cursor: pointer;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Generador TOTP</h1>
+
+		<div class="info">
+			<strong>Información:</strong> Esta herramienta genera códigos TOTP (Time-based One-Time Password)
+			usando el algoritmo HMAC-SHA1. Los códigos se actualizan automáticamente cada 30 segundos.
+		</div>
+
+		<div class="form-group">
+			<label for="secret">Secreto Base32:</label>
+			<input type="text" id="secret" placeholder="Ingresa tu secreto Base32...">
+		</div>
+
+		<button id="generateBtn" class="btn">Generar Código TOTP</button>
+
+		<div id="result" class="message" style="display: none;">
+			<div>Código TOTP:</div>
+
+			<div class="otp-code" id="otpCode"></div>
+
+			<button id="copyBtn" class="btn btn-secondary" style="display:none;">📋 Copiar</button>
+
+			<div class="timer" id="timer">Tiempo restante: <span id="countdown">30</span>s</div>
+		</div>
+	</div>
+
+	<script>
+		function base32Decode(input) {
+			const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ234567";
+			let bits = "";
+			let bytes = [];
+
+			input = input.replace(/=+$/, "");
+
+			for (let c of input) {
+				const val = alphabet.indexOf(c.toUpperCase());
+				if (val === -1) throw new Error("Base32 inválido");
+				bits += val.toString(2).padStart(5, "0");
+			}
+
+			for (let i = 0; i + 8 <= bits.length; i += 8) {
+				bytes.push(parseInt(bits.substring(i, i + 8), 2));
+			}
+
+			return new Uint8Array(bytes);
+		}
+
+		async function generateTOTP(secretBase32) {
+			const key = base32Decode(secretBase32);
+			const epoch = Math.floor(Date.now() / 1000);
+			const timeStep = Math.floor(epoch / 30);
+
+			const buffer = new ArrayBuffer(8);
+			const view = new DataView(buffer);
+			view.setUint32(4, timeStep);
+
+			const cryptoKey = await crypto.subtle.importKey(
+				"raw",
+				key,
+				{ name: "HMAC", hash: "SHA-1" },
+				false,
+				["sign"]
+			);
+
+			const hmac = new Uint8Array(await crypto.subtle.sign("HMAC", cryptoKey, buffer));
+			const offset = hmac[hmac.length - 1] & 0x0f;
+
+			const binary =
+				((hmac[offset] & 0x7f) << 24) |
+				((hmac[offset + 1] & 0xff) << 16) |
+				((hmac[offset + 2] & 0xff) << 8) |
+				(hmac[offset + 3] & 0xff);
+
+			return (binary % 1_000_000).toString().padStart(6, "0");
+		}
+
+		const secretInput = document.getElementById('secret');
+		const generateBtn = document.getElementById('generateBtn');
+		const resultDiv = document.getElementById('result');
+		const otpCode = document.getElementById('otpCode');
+		const timerDiv = document.getElementById('timer');
+		const countdownSpan = document.getElementById('countdown');
+		const copyBtn = document.getElementById("copyBtn");
+
+		let countdownInterval = null;
+
+		function updateCountdown() {
+			const now = Math.floor(Date.now() / 1000);
+			const remaining = 30 - (now % 30);
+
+			countdownSpan.textContent = remaining;
+
+			if (remaining <= 5) {
+				countdownSpan.style.color = '#f44336';
+				countdownSpan.style.fontWeight = 'bold';
+			} else {
+				countdownSpan.style.color = '';
+				countdownSpan.style.fontWeight = '';
+			}
+		}
+
+		async function generateAndDisplayTOTP() {
+			const secret = secretInput.value.trim();
+
+			if (!secret) {
+
+				otpCode.textContent = '';
+				resultDiv.style.display = 'none';
+				clearInterval(countdownInterval);
+				countdownInterval = null;
+				return;
+			}
+
+			try {
+				generateBtn.disabled = true;
+				generateBtn.textContent = 'Generando...';
+
+				const code = await generateTOTP(secret);
+
+				otpCode.textContent = code;
+				resultDiv.style.display = 'block';
+				resultDiv.className = 'message success';
+
+				copyBtn.style.display = "inline-block";
+
+				if (!countdownInterval) {
+					updateCountdown();
+					countdownInterval = setInterval(updateCountdown, 1000);
+				}
+
+			} catch (error) {
+				showError(error.message);
+			} finally {
+				generateBtn.disabled = false;
+				generateBtn.textContent = 'Generar Código TOTP';
+			}
+		}
+
+		copyBtn.addEventListener("click", async () => {
+			const code = otpCode.textContent.trim();
+			await navigator.clipboard.writeText(code);
+
+			copyBtn.textContent = "✔ Copiado";
+			setTimeout(() => copyBtn.textContent = "📋 Copiar", 1500);
+		});
+
+		function showError(message) {
+			resultDiv.style.display = 'block';
+			resultDiv.className = 'message error';
+			otpCode.textContent = 'ERROR';
+			timerDiv.textContent = message;
+		}
+
+		generateBtn.addEventListener('click', generateAndDisplayTOTP);
+
+		secretInput.addEventListener('keypress', e => {
+			if (e.key === 'Enter') generateAndDisplayTOTP();
+		});
+
+		setInterval(() => {
+			if (secretInput.value.trim()) generateAndDisplayTOTP();
+		}, 30000);
+
+	</script>
+</body>
+
+</html>

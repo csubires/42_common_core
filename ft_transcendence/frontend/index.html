@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Transcendence</title>
+	<link rel="stylesheet" href="output.css" />
+	<link rel="stylesheet" href="styles.css" />
+	<link rel="icon" href="/icon.png">
+</head>
+
+<body class="bg-gray-900 text-white min-h-screen">
+
+	<!-- Navbar -->
+	<nav id="navbar" class="bg-gray-800 p-2 sm:p-4 hidden">
+		<div class="max-w-6xl mx-auto px-2">
+			<div class="flex flex-wrap gap-2 items-center justify-center">
+				<h1 class="text-lg sm:text-xl font-bold text-yellow-400 cursor-pointer mr-2" data-nav="home">🎮
+					Transcendence</h1>
+				<button class="nav-btn" data-nav="home" data-i18n="navBar.home">Home</button>
+				<button class="nav-btn" data-nav="games" data-i18n="navBar.games">Games</button>
+				<button class="nav-btn" data-nav="tournament" data-i18n="navBar.tournament">Tournament</button>
+				<button class="nav-btn" data-nav="players" data-i18n="navBar.players">Players</button>
+				<button class="nav-btn" data-nav="friends" data-i18n="navBar.friends">Friends</button>
+				<button class="nav-btn" data-nav="dashboard" data-i18n="navBar.dashboard">Dashboard</button>
+				<button class="nav-btn" data-nav="profile" data-i18n="navBar.profile">Profile</button>
+				<button id="authBtn" data-i18n="navBar.login" class="nav-btn bg-blue-600 hover:bg-blue-700">Login</button>
+				<select class="nav-btn bg-blue-600 hover:bg-blue-700" id="languageSelect">
+					<option class="nav-btn" value="es">🇪🇸 ES</option>
+					<option class="nav-btn" value="en">🇺🇸 EN</option>
+					<option class="nav-btn" value="ja">🇯🇵 JA</option>
+				</select>
+			</div>
+		</div>
+	</nav>
+
+	<!-- App Container -->
+	<div id="app" class="max-w-6xl mx-auto p-2 sm:p-4 pb-32 sm:pb-36"></div>
+
+	<!-- Exit Game Button (Game page) -->
+	<div id="exitGameContainer" class="fixed bottom-4 right-4 hidden">
+		<button onclick="exitGame()" class="btn btn-red">← Exit Game</button>
+	</div>
+
+	<!-- Footer -->
+	<footer id="footer" class="bg-gray-800 border-t border-gray-700 py-4 sm:py-6 fixed bottom-0 left-0 right-0 z-50">
+		<div class="max-w-6xl mx-auto px-2 sm:px-4">
+			<div class="flex flex-col md:flex-row justify-between items-center gap-2 sm:gap-4">
+				<div class="text-gray-400 text-xs sm:text-sm" data-i18n="footer.copy">
+					© 2026 Transcendence. All rights reserved.
+				</div>
+				<div class="flex flex-wrap gap-3 sm:gap-6 text-xs sm:text-sm justify-center">
+					<button onclick="navigate('privacy-policy')"
+						class="text-gray-400 hover:text-yellow-400 transition-colors" data-i18n="footer.privacyPolicy">
+						Privacy Policy
+					</button>
+					<button onclick="navigate('terms-of-service')"
+						class="text-gray-400 hover:text-yellow-400 transition-colors" data-i18n="footer.termsOfService">
+						Terms of Service
+					</button>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<!-- Modal -->
+	<div id="modal" class="modal hidden"></div>
+
+	<!-- Countdown -->
+	<div id="countdown" class="countdown hidden">
+		<span id="countdownText"></span>
+	</div>
+
+	<script type="module" src="main.js"></script>
+</body>
+
+</html>

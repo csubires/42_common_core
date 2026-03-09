@@ -1,0 +1,21 @@
+{
+	"type": "module",
+	"main": "database/index.js",
+	"scripts": {
+		"start": "node database/index.js"
+	},
+	"dependencies": {
+		"@fastify/passport": "^3.0.2",
+		"@fastify/secure-session": "^8.3.0",
+		"@fastify/static": "^8.3.0",
+		"@fastify/cookie": "^11.0.2",
+		"@fastify/formbody": "^8.0.2",
+		"@fastify/cors": "^11.1.0",
+		"@fastify/multipart": "^9.0.0",
+		"sharp": "^0.33.5",
+		"bcrypt": "^6.0.0",
+		"speakeasy": "^2.0.0",
+		"fastify": "^5.6.2",
+		"sqlite3": "^5.1.6"
+	}
+}

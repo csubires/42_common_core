@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "build:css": "tailwindcss -c ./tailwind.config.ts -i ./input.css -o ./output.css --minify",
+    "build:ts": "tsc",
+    "build": "npm run build:css && npm run build:ts"
+  },
+  "dependencies": {
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.1",
+    "postcss": "^8.4.35",
+    "autoprefixer": "^10.4.17",
+    "tsx": "^4.7.0"
+  }
+}

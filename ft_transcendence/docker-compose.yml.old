@@ -1,0 +1,268 @@
+x-healthchecks:
+  nginx: &nginx-healthcheck
+    test: ["CMD", "nginx", "-t"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+  redis: &redis-healthcheck
+    test: ["CMD", "redis-cli", "ping"]
+    interval: 30s
+    timeout: 3s
+    retries: 3
+  prometheus: &prometheus-healthcheck
+    test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:9090/-/healthy || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 15s
+  vault: &vault-healthcheck
+    test: ["CMD-SHELL", "curl -k -s https://localhost:8200/v1/sys/health | grep -q '\"initialized\":true' || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 30s
+  grafana: &grafana-healthcheck
+    test: ["CMD-SHELL", "wget --no-check-certificate --no-verbose --tries=1 --spider https://localhost:3301/api/health || exit 1"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 30s
+  gateway: &gateway-healthcheck
+    test: ["CMD", "curl", "-f", "-s", "http://localhost:3000/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+    start_period: 30s
+    start_interval: 30s
+  database: &database-healthcheck
+      test: ["CMD", "curl", "-f",  "-s", "http://localhost:3003/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+  auth: &auth-healthcheck
+    test: ["CMD", "curl", "-f",  "-s", "http://localhost:3001/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+  i18n: &i18n-healthcheck
+    test: ["CMD", "curl", "-f", "http://localhost:3002/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+  users: &users-healthcheck
+    test: ["CMD", "curl", "-f", "http://localhost:3004/health"]
+    interval: 30s
+    timeout: 10s
+    retries: 3
+
+services:
+
+  gateway:
+    image: gateway
+    build:
+      network: host
+      context: gateway
+      dockerfile: Dockerfile
+    container_name: gateway
+    ports: ["3000:3000"]
+    networks: [transcendence-net]
+    env_file: .env
+    environment:
+      - NODE_ENV=development
+      - GATEWAY_PORT=3000
+      - AUTH_SERVICE_URL=http://auth:3001
+      - I18N_SERVICE_URL=http://i18n:3002
+      - DATABASE_SERVICE_URL=http://database:3003
+      - USERS_SERVICE_URL=http://users:3004
+    volumes:
+      - ./data:/app/data
+      - ./frontend:/app/frontend
+      - ./gateway:/app/gateway
+      - ./database:/app/database
+      - ./auth:/app/auth
+      - ./shared:/app/shared
+      - ./users:/app/users
+      - logs-data:/app/logs
+    depends_on:
+      auth:
+        condition: service_healthy
+      i18n:
+        condition: service_healthy
+      database:
+        condition: service_healthy
+    healthcheck: *gateway-healthcheck
+
+  database:
+    image: database
+    build:
+      network: host
+      context: database
+      dockerfile: Dockerfile
+    container_name: database
+    ports: ["3003:3003"]
+    networks: [transcendence-net]
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+      - ./database:/app/database
+      - ./shared:/app/shared
+    healthcheck: *database-healthcheck
+
+  auth:
+    image: auth
+    build:
+      network: host
+      context: auth
+      dockerfile: Dockerfile
+    container_name: auth
+    ports: ["3001:3001"]
+    networks: [transcendence-net]
+    env_file: .env
+    environment:
+      - NODE_ENV=development
+      - AUTH_SERVICE_PORT=3001
+    volumes:
+      - ./data:/app/data
+      - ./auth:/app/auth
+      - ./frontend:/app/frontend
+      - ./database:/app/database
+      - ./gateway:/app/gateway
+      - ./shared:/app/shared
+      - ./users:/app/users
+    depends_on:
+      database:
+        condition: service_healthy
+    healthcheck: *auth-healthcheck
+
+  i18n:
+    image: i18n
+    build:
+      network: host
+      context: i18n
+      dockerfile: Dockerfile
+    container_name: i18n
+    ports: ["3002:3002"]
+    networks: [transcendence-net]
+    env_file: .env
+    volumes:
+      - ./i18n:/app/i18n
+      - ./shared:/app/shared
+    healthcheck: *i18n-healthcheck
+
+  users:
+    image: users
+    build:
+      network: host
+      context: users
+      dockerfile: Dockerfile
+    container_name: users
+    ports: ["3004:3004"]
+    networks: [transcendence-net]
+    env_file: .env
+    volumes:
+      - ./database:/app/database
+      - ./gateway:/app/gateway
+      - ./auth:/app/auth
+      - ./users:/app/users
+      - ./shared:/app/shared
+    healthcheck: *users-healthcheck
+
+  nginx-waf:
+    image: nginx-waf
+    build:
+      network: host
+      context: nginx
+      dockerfile: Dockerfile
+    container_name: nginx-waf
+    ports: ["8443:443"]
+    volumes:
+      - logs-data:/var/log/nginx
+    depends_on:
+      - gateway
+    healthcheck: *nginx-healthcheck
+    networks: [transcendence-net]
+    restart: always
+
+  vault:
+    image: vault
+    container_name: vault
+    build:
+      network: host
+      context: vault
+      dockerfile: Dockerfile
+    env_file: .env
+    volumes:
+      - ./nginx/ssl:/vault/ssl:ro
+      - ./vault/policy.hcl:/vault/policies/policy.hcl:ro
+    ports: ["8444:8200"]
+    networks: [transcendence-net]
+    healthcheck: *vault-healthcheck
+    restart: always
+
+  redis:
+    image: redis
+    container_name: redis
+    build:
+      network: host
+      context: redis
+      dockerfile: Dockerfile
+    volumes:
+      - redis-data:/data
+      - logs-data:/var/log/redis
+    networks: [transcendence-net]
+    healthcheck: *redis-healthcheck
+    restart: always
+
+  prometheus:
+    image: prometheus
+    build:
+      network: host
+      context: prometheus
+      dockerfile: Dockerfile
+    container_name: prometheus
+    volumes:
+      - prometheus-data:/prometheus
+      - logs-data:/logs:ro
+      - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    networks: [transcendence-net]
+    healthcheck: *prometheus-healthcheck
+    restart: unless-stopped
+
+  grafana:
+    image: grafana
+    build:
+      network: host
+      context: grafana
+      dockerfile: Dockerfile
+    container_name: grafana
+    user: "root"
+    env_file: .env
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - logs-data:/var/log/grafana
+      - ./nginx/ssl:/etc/grafana/ssl:ro
+      - ./grafana/dashboards:/var/lib/grafana/dashboards
+    ports: ["8445:3301"]
+    networks: [transcendence-net]
+    depends_on:
+      prometheus:
+        condition: service_healthy
+    healthcheck: *grafana-healthcheck
+    restart: unless-stopped
+
+volumes:
+  redis-data:
+    name: redis-data
+  logs-data:
+    name: logs-data
+  grafana-data:
+    name: grafana-data
+  prometheus-data:
+    name: prometheus-data
+
+networks:
+  transcendence-net:
+    name: transcendence-net
+    driver: bridge
+    enable_ipv6: false

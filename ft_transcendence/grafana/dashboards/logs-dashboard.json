@@ -1,0 +1,64 @@
+{
+  "title": "Log Viewer",
+  "uid": "log-viewer",
+  "schemaVersion": 36,
+  "version": 1,
+  "timezone": "browser",
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "table",
+      "title": "Log Content",
+      "gridPos": { "h": 20, "w": 24, "x": 0, "y": 0 },
+      "targets": [
+        {
+          "expr": "log_file_content",
+          "refId": "A",
+          "format": "table",
+          "instant": true
+        }
+      ],
+      "transformations": [
+        {
+          "id": "filterFieldsByName",
+          "options": {
+            "include": ["service", "file", "line", "ln"]
+          }
+        },
+        {
+          "id": "organize",
+          "options": {
+            "renameByName": {
+              "service": "Service",
+              "file": "File",
+              "line": "Line",
+              "ln": "Line #"
+            }
+          }
+        },
+        {
+          "id": "sortBy",
+          "options": {
+            "sort": [
+              {
+                "field": "Line #",
+                "desc": false
+              }
+            ]
+          }
+        }
+      ],
+      "options": {
+        "showHeader": true
+      }
+    },
+    {
+      "type": "text",
+      "gridPos": { "h": 4, "w": 24, "x": 0, "y": 20 },
+      "title": "Filters",
+      "options": {
+        "content": "Use the **filters panel** above (top of dashboard) to filter by:\n\n- `service`\n- `file`\n- `line` (regex supported)\n\nExample search:\n```\nline=~\".*error.*\"\n```\n"
+      }
+    }
+  ]
+}
